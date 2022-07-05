@@ -1,36 +1,31 @@
-#include "Counter.h"
 #include <iostream>
+#include "Counter.h"
 
-void Counter::count_up(void)
+void Counter::count_up()
 {
 	++counter;
 }
 
-void Counter::count_down(void)
+void Counter::count_down()
 {
 	--counter;
 }
 
-void Counter::count_show(void)
+int Counter::count_show()
 {
-	std::wcout << L"Счётчик = " << counter << std::endl;
+	return counter;
 }
 
-Counter::Counter(const int n)
+Counter::Counter(int n)
 {
 	if (n != 1)
 	{
-		std::wcout << L"Начальное значение установлено в " << n << '\n';
 		counter = n;
 	}
 	else
 	{
-		std::wcout << L"Начальное значение установлено в \"1\"\n";
 		counter = 1;
 	}
 }
 
-Counter::~Counter()
-{
-	std::wcout << L"Пока!\n";
-}
+Counter::~Counter() { }

@@ -1,11 +1,12 @@
 #pragma once
+
 class Counter
 {
 public:
 	void count_up();
 	void count_down();
-	void count_show(void);
-	Counter(const int n);
+	int count_show(void);
+	Counter(int n);
 	~Counter();
 private:
 	int counter;

@@ -1,8 +1,17 @@
-#include "Counter.h"
 #include <iostream>
 #include <string>
 #include <Windows.h>
-#include <algorithm>
+#include "Counter.h"
+
+const std::wstring & tolower(std::wstring & const str)
+{
+	for (int i = 0; i < str.size(); ++i)
+	{
+		str[i] = towlower(str[i]);
+	}
+
+	return str;
+}
 
 int main()
 {
@@ -15,26 +24,29 @@ int main()
 
 	std::wstring answer;
 	getline(std::wcin, answer);
-	std::transform(answer.begin(), answer.end(), answer.begin(), ::towlower);
+	answer = tolower(answer);
 
 	while (answer != L"да" && answer != L"нет")
 	{
 		std::wcout << L"Пожалуйста, введите \"да\" или \"нет\": ";
 		getline(std::wcin, answer);
+		answer = tolower(answer);
 	}
 
-	bool check = false;
-	answer == L"да" ? check = true : check = false;
+	bool is_positive = false;
+	answer == L"да" ? is_positive = true : is_positive = false;
+	
 	int start_value = 1;
 
-	if (check)
+	if (is_positive)
 	{
 		std::wcout << L"Введите начальное значение: ";
 
 		while (!(std::wcin >> start_value))
 		{
 			std::wcin.clear();
-			while (std::wcin.get() != '\n')
+			std::wcin.ignore(32767, L'\n');
+			while (std::wcin.get() != L'\n')
 				continue;
 			std::wcout << L"Пожалуйста, введите целочисленное значение: ";
 		}
@@ -43,32 +55,44 @@ int main()
 	}
 
 	std::system("cls");
+	std::wcout << L"Начальное значение установлено в " << start_value << '\n';
 	Counter new_counter = Counter(start_value);
 
 	while (towlower(answer.front()) != L'x' && towlower(answer.front() != L'ч'))
 	{
-		std::wcout << L"Нажмите '+', '-', '=' или 'X': ";
+		std::wcout << L"Введите команду ('+', '-', '=' или 'X'): ";
 		getline(std::wcin, answer);
 
 		switch (answer.front())
 		{
 			case L'+':
+			{
 				new_counter.count_up();
 				break;
+			}
 			case L'-':
+			{
 				new_counter.count_down();
 				break;
+			}
 			case L'=':
-				new_counter.count_show();
+			{
+				std::wcout << L"Счётчик: " << new_counter.count_show() << std::endl;
 				break;
+			}
 			case L'ч':
 			case L'x':
+			{
 				break;
+			}
 			default:
+			{
 				std::wcout << L"Такого действия нет!\n";
 				break;
+			}
 		}
 	}
 
+	std::wcout << L"Пока!\n";
 	return 0;
 }
