@@ -55,7 +55,7 @@ int main()
 	}
 
 	std::system("cls");
-	std::wcout << L"Начальное значение установлено в " << start_value << '\n';
+	std::wcout << L"Начальное значение установлено в " << start_value << L'\n';
 	Counter new_counter = Counter(start_value);
 
 	while (towlower(answer.front()) != L'x' && towlower(answer.front() != L'ч'))
