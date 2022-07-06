@@ -27,5 +27,3 @@ Counter::Counter(int n)
 		counter = 1;
 	}
 }
-
-Counter::~Counter() { }

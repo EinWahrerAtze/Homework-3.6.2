@@ -3,7 +3,7 @@
 #include <Windows.h>
 #include "Counter.h"
 
-const std::wstring & tolower(std::wstring & const str)
+const std::wstring & tolower(std::wstring & str)
 {
 	for (int i = 0; i < str.size(); ++i)
 	{
